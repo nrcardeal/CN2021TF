@@ -7,11 +7,12 @@ import cnv2021tfservice.services.FirestoreService;
 import com.google.auth.oauth2.GoogleCredentials;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
-
-import java.util.Scanner;
+import java.util.Arrays;
+import java.util.concurrent.ExecutionException;
 
 public class Server extends ServiceGrpc.ServiceImplBase {
     public static int svcPort = Integer.parseInt(System.getenv("PORT"));
+    private final FirestoreService firestoreService = new FirestoreService();
 
     public static void main(String[] args) {
         io.grpc.Server svc = null;
@@ -37,7 +38,16 @@ public class Server extends ServiceGrpc.ServiceImplBase {
 
     @Override
     public void getLabelsList(ImageResult request, StreamObserver<Labels> responseObserver) {
-        super.getLabelsList(request, responseObserver);
+        try {
+            firestoreService.addLabelsAndTranslations(request.getId());
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        responseObserver.onNext(Labels.newBuilder()
+               .addAllLabels(Arrays.asList(firestoreService.originals))
+               .addAllLabelsTranslations(Arrays.asList(firestoreService.translated))
+               .build());
+        responseObserver.onCompleted();
     }
 
     @Override

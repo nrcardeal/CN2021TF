@@ -17,7 +17,6 @@ public class ServerObserver implements StreamObserver<ImageRequest> {
     private final CloudStorageService cloudStorageService = new CloudStorageService();
     private final CloudPubSubService cloudPubSubService = new CloudPubSubService();
     private final DetectTranslateService detectTranslateService = new DetectTranslateService();
-    private final FirestoreService firestoreService = new FirestoreService();
 
     public ServerObserver(StreamObserver<ImageResult> imageObserver) {
         this.imageObserver = imageObserver;

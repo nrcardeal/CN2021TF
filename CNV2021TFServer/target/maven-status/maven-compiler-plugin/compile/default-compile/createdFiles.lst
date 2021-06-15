@@ -1,0 +1,4 @@
+cnv2021tfservice\services\FirestoreService.class
+cnv2021tfservice\services\CloudStorageService.class
+cnv2021tfservice\services\CloudPubSubService.class
+cnv2021tfservice\services\DetectTranslateService.class

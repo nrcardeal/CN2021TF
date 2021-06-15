@@ -1,2 +1,6 @@
-C:\Users\NRAFA\Documents\Projects\CNV2021TFServer\src\main\java\server\CloudStorageService.java
-C:\Users\NRAFA\Documents\Projects\CNV2021TFServer\src\main\java\server\Server.java
+C:\CN\CN2021TF\CNV2021TFServer\src\main\java\cnv2021tfservice\services\FirestoreService.java
+C:\CN\CN2021TF\CNV2021TFServer\src\main\java\cnv2021tfservice\services\CloudStorageService.java
+C:\CN\CN2021TF\CNV2021TFServer\src\main\java\cnv2021tfservice\services\DetectTranslateService.java
+C:\CN\CN2021TF\CNV2021TFServer\src\main\java\cnv2021tfservice\observers\ServerObserver.java
+C:\CN\CN2021TF\CNV2021TFServer\src\main\java\cnv2021tfservice\server\Server.java
+C:\CN\CN2021TF\CNV2021TFServer\src\main\java\cnv2021tfservice\services\CloudPubSubService.java
