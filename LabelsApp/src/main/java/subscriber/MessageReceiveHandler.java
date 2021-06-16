@@ -18,7 +18,7 @@ public class MessageReceiveHandler implements MessageReceiver {
             String bucketName = message.split(" ")[1];
             String blobName = message.split(" ")[2];
             List<String> labels = DetectService.detectLabels(bucketName, blobName);
-            PubSubService.publishMessage(labels.toString(), blobName);
+            PubSubService.publishMessage(blobName + '-' + labels, blobName);
             ackReply.ack();
         } catch (Exception e) {
             e.printStackTrace();
