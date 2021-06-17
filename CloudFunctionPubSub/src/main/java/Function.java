@@ -3,9 +3,7 @@ import com.google.cloud.functions.BackgroundFunction;
 import com.google.cloud.functions.Context;
 
 import java.io.IOException;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Logger;
 
 public class Function implements BackgroundFunction<Message> {
@@ -26,13 +24,14 @@ public class Function implements BackgroundFunction<Message> {
         logger.info(data);
         String id = data.split(":")[0];
         String lbls = data.split(":")[1];
-        String[] labels = lbls.substring(1, lbls.length()-1).split(", ");
-        String[] translated = TranslateService.TranslateLabels(labels);
+        List<String> labels = Arrays.asList(lbls.substring(1, lbls.length()-1).split(", "));
+        List<String> translated = TranslateService.TranslateLabels(labels);
         try {
             firestore.addDocument(new HashMap<>(){{
+                put("id", id);
                 put("labels", labels);
                 put("translated", translated);
-                put("uploaded", msg.publishTime);
+                put("uploaded", new Date().toString());
             }}, id);
         } catch (Exception e) {
             logger.info(e.getMessage());

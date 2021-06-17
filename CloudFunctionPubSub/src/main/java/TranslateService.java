@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TranslateService {
-    static String[] TranslateLabels(String[] labels) {
-        List<String> labelsTranslated = new ArrayList<>(labels.length);
+    static List<String> TranslateLabels(List<String> labels) {
+        List<String> labelsTranslated = new ArrayList<>(labels.size());
         try {
             Translate translate = TranslateOptions.getDefaultInstance().getService();
             for (String label : labels) {
@@ -21,7 +21,7 @@ public class TranslateService {
             ex.printStackTrace();
         }
 
-        return labelsTranslated.toArray(new String[labels.length]);
+        return labelsTranslated;
 
     }
 }

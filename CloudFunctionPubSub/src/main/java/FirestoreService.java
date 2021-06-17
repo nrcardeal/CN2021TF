@@ -19,7 +19,7 @@ public class FirestoreService {
 
     public void addDocument(HashMap<String, Object> hMap, String filename) throws Exception {
         ApiFuture<WriteResult> future = database
-                .collection("BlobMetadata")
+                .collection("image-labels")
                 .document(filename + "-metadata")
                 .create(hMap);
         future.get();
