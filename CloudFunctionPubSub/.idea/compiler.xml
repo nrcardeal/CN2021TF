@@ -9,5 +9,8 @@
         <module name="CloudFunctionPubSub" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="CloudFunctionPubSub" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>

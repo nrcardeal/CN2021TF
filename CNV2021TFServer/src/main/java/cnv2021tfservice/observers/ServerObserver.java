@@ -41,8 +41,14 @@ public class ServerObserver implements StreamObserver<ImageRequest> {
     public void onCompleted() {
         try {
             BlobId blobId = cloudStorageService.closeWriter();
+            ImageResult result = ImageResult
+                    .newBuilder()
+                    .setId(blobId.getBucket() + '-' + blobId.getName())
+                    .build();
+            imageObserver.onNext(result);
+            imageObserver.onCompleted();
             cloudPubSubService.publishMessage(
-            blobId.toString() + " " + blobId.getBucket() + " " + blobId.getName(),
+                    result.getId() + " " + blobId.getBucket() + " " + blobId.getName(),
                     blobId.getName()
             );
         } catch (Exception e) {

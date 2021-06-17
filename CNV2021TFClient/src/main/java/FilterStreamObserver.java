@@ -1,4 +1,4 @@
-import cnv2021tfservice.FilterResult
+import cnv2021tfservice.FilterResult;
 import io.grpc.stub.StreamObserver;
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ public class FilterStreamObserver implements StreamObserver<FilterResult> {
 
     @Override
     public void onNext(FilterResult result) {
-        this.result = result
+        this.result = result;
     }
 
     @Override

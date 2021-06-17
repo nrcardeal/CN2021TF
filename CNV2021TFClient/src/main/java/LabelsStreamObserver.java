@@ -1,4 +1,4 @@
-import cnv2021tfservice.Labels
+import cnv2021tfservice.Labels;
 import io.grpc.stub.StreamObserver;
 
 import java.util.ArrayList;

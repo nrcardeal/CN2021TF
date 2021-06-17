@@ -24,23 +24,18 @@ public class Function implements BackgroundFunction<Message> {
     public void accept(Message msg, Context context) {
         String data = new String(Base64.getDecoder().decode(msg.data));
         logger.info(data);
-        String name = data.split("-")[0];
-        String[] labels = data.split("-")[1].substring(1, data.length()-1).split(", ");
+        String id = data.split(":")[0];
+        String lbls = data.split(":")[1];
+        String[] labels = lbls.substring(1, lbls.length()-1).split(", ");
         String[] translated = TranslateService.TranslateLabels(labels);
         try {
             firestore.addDocument(new HashMap<>(){{
                 put("labels", labels);
                 put("translated", translated);
                 put("uploaded", msg.publishTime);
-            }}, name);
+            }}, id);
         } catch (Exception e) {
             logger.info(e.getMessage());
         }
     }
-}
-class Message {
-    String data;
-    Map<String, String> attributes;
-    String messageId;
-    String publishTime;
 }

@@ -2,7 +2,6 @@ import com.google.cloud.translate.Translate;
 import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

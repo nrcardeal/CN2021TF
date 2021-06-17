@@ -15,10 +15,13 @@ public class MessageReceiveHandler implements MessageReceiver {
     public void receiveMessage(PubsubMessage msg, AckReplyConsumer ackReply) {
         String message = msg.getData().toStringUtf8();
         try {
-            String bucketName = message.split(" ")[1];
-            String blobName = message.split(" ")[2];
+            System.out.println(message);
+            String[] fields = message.split(" ");
+            String id = fields[0];
+            String bucketName = fields[1];
+            String blobName = fields[2];
             List<String> labels = DetectService.detectLabels(bucketName, blobName);
-            PubSubService.publishMessage(blobName + '-' + labels, blobName);
+            PubSubService.publishMessage(id + ':' + labels, blobName);
             ackReply.ack();
         } catch (Exception e) {
             e.printStackTrace();
