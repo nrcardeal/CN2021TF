@@ -12,7 +12,7 @@ public class CloudFunction implements HttpFunction {
        if(httpRequest.getFirstQueryParameter("name").isPresent()) {
            BufferedWriter writer = httpResponse.getWriter();
            String instanceGroup =  httpRequest.getFirstQueryParameter("name").get();
-           List<Pair> instances = LookupService.listInstanceGroupInstances(instanceGroup);
+           List<String> instances = LookupService.listInstanceGroupInstances(instanceGroup);
            Gson gson = new Gson();
            gson.toJson(instances);
            writer.write(gson.toString());
