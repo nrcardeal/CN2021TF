@@ -28,13 +28,13 @@ public class ServerObserver implements StreamObserver<ImageRequest> {
         try {
             cloudStorageService.uploadToStorage(imageRequest);
         } catch (IOException e) {
-
+            e.printStackTrace();
         }
     }
 
     @Override
     public void onError(Throwable throwable) {
-
+        imageObserver.onError(throwable.getCause());
     }
 
     @Override

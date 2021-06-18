@@ -17,7 +17,7 @@ public class PubSubService {
             ByteString msgData = ByteString.copyFromUtf8(message);
             PubsubMessage pubsubMessage = PubsubMessage.newBuilder()
                     .setData(msgData)
-                    .putAttributes(blobName + "-metadata", "value1")
+                    .putAttributes("filename", blobName)
                     .build();
             ApiFuture<String> future = publisher.publish(pubsubMessage);
             String msgID = future.get();

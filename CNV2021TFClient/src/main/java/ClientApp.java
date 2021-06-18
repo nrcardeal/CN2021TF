@@ -1,7 +1,5 @@
-import cnv2021tfservice.ImageRequest;
-import cnv2021tfservice.FilterRequest;
-import cnv2021tfservice.ImageResult;
-import cnv2021tfservice.ServiceGrpc;
+import cnv2021tfservice.*;
+import com.google.gson.Gson;
 import com.google.protobuf.ByteString;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -9,9 +7,14 @@ import io.grpc.stub.StreamObserver;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Scanner;
 
 public class ClientApp {
@@ -19,19 +22,32 @@ public class ClientApp {
     //to use on local machine
     private static String svcIP = "localhost";
     //to use with vm
-    //private static String svcIP = "35.246.54.43";
+    //private static String svcIP;
     private static int svcPort = 8000;
     private static ManagedChannel channel;
     private static ServiceGrpc.ServiceStub noBlockStub;
+    private static ServiceGrpc.ServiceBlockingStub blockingStub;
 
     public static void main(String[] args) {
         try {
+            if(!svcIP.equals("localhost")) {
+                String cfURL = "https://europe-west3-g12-t1d-v2021.cloudfunctions.net/cn-http-function?name=cn2021vtf-server-instance-group";
+                HttpClient client = HttpClient.newBuilder().build();
+                HttpRequest request = HttpRequest.newBuilder()
+                        .uri(URI.create(cfURL))
+                        .GET()
+                        .build();
+                HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                if (response.statusCode() == 200)
+                    svcIP = randomizeIP(response.body());
+            }
             channel = ManagedChannelBuilder.forAddress(svcIP, svcPort)
                     // Channels are secure by default (via SSL/TLS).
                     // For the example we disable TLS to avoid needing certificates.
                     .usePlaintext()
                     .build();
             noBlockStub = ServiceGrpc.newStub(channel);
+            blockingStub = ServiceGrpc.newBlockingStub(channel);
             while (true) {
                 try {
                     int option = Menu();
@@ -98,31 +114,32 @@ public class ClientApp {
                 );
             }
             contents.onCompleted();
-            System.out.println(streamObserver.results.get(0));
+            while (!streamObserver.isCompleted) {
+                System.out.println("Uploading Image...");
+                Thread.sleep(1000);
+            }
+            System.out.println("Image uploaded with ID: " + streamObserver.results.get(0).getId());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    static void ListLabels(){
+    static void ListLabels() {
         System.out.println("Please insert file Id:");
         Scanner in = new Scanner(System.in);
         String fileId = in.nextLine();
         ImageResult imageResult = ImageResult.newBuilder()
                 .setId(fileId)
                 .build();
-        LabelsStreamObserver labelsObserver = new LabelsStreamObserver();
-        noBlockStub.getLabelsList(imageResult, labelsObserver);
-        while (!labelsObserver.isCompleted) ;
-        if (labelsObserver.success) {
-            System.out.println("Labels:");
-            for (String label: labelsObserver.labels.getLabelsList()) {
-                System.out.println(label);
-            }
-            System.out.println("Características:");
-            for (String label: labelsObserver.labels.getLabelsTranslationsList()) {
-                System.out.println(label);
-            }
+        Labels labels = blockingStub.getLabelsList(imageResult);
+        System.out.println("Labels:");
+        for (String label: labels.getLabelsList()) {
+            System.out.println(label);
+        }
+        System.out.println();
+        System.out.println("Características:");
+        for (String label: labels.getLabelsTranslationsList()) {
+            System.out.println(label);
         }
 
 
@@ -144,19 +161,25 @@ public class ClientApp {
                 .setEndDate(endDate)
                 .setLabel(label)
                 .build();
-        FilterStreamObserver filterObserver = new FilterStreamObserver();
-        noBlockStub.filterFiles(request, filterObserver);
-        while (!filterObserver.isCompleted);
-        if (filterObserver.success) {
+        FilterResult result = blockingStub.filterFiles(request);
+        System.out.println("Searching for files...");
+        if(!result.getFilenameList().isEmpty()) {
             System.out.println("Filtered Files:");
-            for ( String name: filterObserver.result.getFilenameList()) {
+            for (String name : result.getFilenameList()) {
                 System.out.println(name);
             }
-            in = new Scanner(System.in);
-            in.nextLine();
+        }
+        else {
+            System.out.println("There were no files with those filters.");
         }
     }
 
+    static String randomizeIP(String body){
+        Gson gson = new Gson();
+        List<String> ips = gson.fromJson(body, List.class);
+        int idx = (int )(Math.random() *(ips.size()-1 ));
+        return ips.get(idx);
+    }
 }
 
 

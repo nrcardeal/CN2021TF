@@ -1,13 +1,17 @@
 package cnv2021tfservice.server;
 
 import cnv2021tfservice.*;
+import cnv2021tfservice.exceptions.DateFormatException;
+import cnv2021tfservice.exceptions.DocumentNotFoundException;
 import cnv2021tfservice.observers.ServerObserver;
 import cnv2021tfservice.services.CloudStorageService;
 import cnv2021tfservice.services.FirestoreService;
 import com.google.auth.oauth2.GoogleCredentials;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
-import java.util.Arrays;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.concurrent.ExecutionException;
 
 public class Server extends ServiceGrpc.ServiceImplBase {
@@ -40,18 +44,31 @@ public class Server extends ServiceGrpc.ServiceImplBase {
     public void getLabelsList(ImageResult request, StreamObserver<Labels> responseObserver) {
         try {
             firestoreService.addLabelsAndTranslations(request.getId());
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
+            responseObserver.onNext(Labels.newBuilder()
+                    .addAllLabels(firestoreService.originals)
+                    .addAllLabelsTranslations(firestoreService.translated)
+                    .build());
+            responseObserver.onCompleted();
+        } catch (Exception | DocumentNotFoundException e) {
+            responseObserver.onError(e);
         }
-        responseObserver.onNext(Labels.newBuilder()
-               .addAllLabels(Arrays.asList(firestoreService.originals))
-               .addAllLabelsTranslations(Arrays.asList(firestoreService.translated))
-               .build());
-        responseObserver.onCompleted();
     }
 
     @Override
     public void filterFiles(FilterRequest request, StreamObserver<FilterResult> responseObserver) {
-        super.filterFiles(request, responseObserver);
+        try {
+            responseObserver.onNext(FilterResult.newBuilder()
+                    .addAllFilename(firestoreService
+                            .getFilteredFilesName(
+                                    new SimpleDateFormat("dd/MM/yyyy").parse(request.getInitDate()),
+                                    new SimpleDateFormat("dd/MM/yyyy").parse(request.getEndDate()),
+                                    request.getLabel())).build());
+            responseObserver.onCompleted();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+            responseObserver.onError(new DateFormatException("Date Format Incorrect."));
+        }
     }
 }

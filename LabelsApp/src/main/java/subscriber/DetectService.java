@@ -33,8 +33,6 @@ public class DetectService {
                     // For full list of available annotations, see http://g.co/cloud/vision/docs
                     for (EntityAnnotation annotation : res.getLabelAnnotationsList()) {
                         labels.add(annotation.getDescription());
-//                        annotation.getAllFields()
-//                                .forEach((k, v) -> System.out.format("%s : %s%n", k, v.toString()));
                     }
                 }
             }

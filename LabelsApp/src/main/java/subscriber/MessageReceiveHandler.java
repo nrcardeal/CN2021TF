@@ -15,7 +15,6 @@ public class MessageReceiveHandler implements MessageReceiver {
     public void receiveMessage(PubsubMessage msg, AckReplyConsumer ackReply) {
         String message = msg.getData().toStringUtf8();
         try {
-            System.out.println(message);
             String[] fields = message.split(" ");
             String id = fields[0];
             String bucketName = fields[1];

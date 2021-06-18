@@ -5,18 +5,50 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9a0ce596-e14e-4f09-a096-965f791af302" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../CloudFunctionPubSub.zip" beforeDir="false" afterPath="$PROJECT_DIR$/../CloudFunctionPubSub.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CNV2021TFServer/src/main/java/cnv2021tfservice/exceptions/BaseException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CNV2021TFServer/src/main/java/cnv2021tfservice/exceptions/DateFormatException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CNV2021TFServer/src/main/java/cnv2021tfservice/exceptions/DocumentNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CNV2021TFClient/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CNV2021TFClient/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CNV2021TFClient/src/main/java/ClientApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CNV2021TFClient/src/main/java/ClientApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CNV2021TFClient/target/CNV2021TFClient-1.0-jar-with-dependencies.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../CNV2021TFClient/target/CNV2021TFClient-1.0-jar-with-dependencies.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CNV2021TFClient/target/CNV2021TFClient-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../CNV2021TFClient/target/CNV2021TFClient-1.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CNV2021TFClient/target/classes/ClientApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CNV2021TFClient/target/classes/ClientApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CNV2021TFClient/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../CNV2021TFClient/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CNV2021TFServer/src/main/java/cnv2021tfservice/observers/ServerObserver.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CNV2021TFServer/src/main/java/cnv2021tfservice/observers/ServerObserver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CNV2021TFServer/src/main/java/cnv2021tfservice/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CNV2021TFServer/src/main/java/cnv2021tfservice/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CNV2021TFServer/src/main/java/cnv2021tfservice/services/FirestoreService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CNV2021TFServer/src/main/java/cnv2021tfservice/services/FirestoreService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CNV2021TFServer/target/CNV2021TFServer-1.0-jar-with-dependencies.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../CNV2021TFServer/target/CNV2021TFServer-1.0-jar-with-dependencies.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CNV2021TFServer/target/CNV2021TFServer-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../CNV2021TFServer/target/CNV2021TFServer-1.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CNV2021TFServer/target/classes/cnv2021tfservice/observers/ServerObserver.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CNV2021TFServer/target/classes/cnv2021tfservice/observers/ServerObserver.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CNV2021TFServer/target/classes/cnv2021tfservice/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CNV2021TFServer/target/classes/cnv2021tfservice/server/Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CNV2021TFServer/target/classes/cnv2021tfservice/services/FirestoreService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CNV2021TFServer/target/classes/cnv2021tfservice/services/FirestoreService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CNV2021TFServer/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../CNV2021TFServer/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CNV2021TFServer/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../CNV2021TFServer/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CloudFunctionLookup/src/main/java/CloudFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CloudFunctionLookup/src/main/java/CloudFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CloudFunctionLookup/src/main/java/LookupService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CloudFunctionLookup/src/main/java/LookupService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CloudFunctionPubSub.zip" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/FirestoreService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FirestoreService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Function.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Function.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TranslateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TranslateService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/CloudFunctionPubSub-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/CloudFunctionPubSub-1.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/FirestoreService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/FirestoreService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Function$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Function$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Function.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Function.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/TranslateService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TranslateService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Message.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Message.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/deployment/CloudFunctionPubSub-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/deployment/CloudFunctionPubSub-1.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LabelsApp/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../LabelsApp/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LabelsApp/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../LabelsApp/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LabelsApp/src/main/java/subscriber/DetectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LabelsApp/src/main/java/subscriber/DetectService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LabelsApp/src/main/java/subscriber/MessageReceiveHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LabelsApp/src/main/java/subscriber/MessageReceiveHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LabelsApp/src/main/java/subscriber/PubSubService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LabelsApp/src/main/java/subscriber/PubSubService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LabelsApp/target/LabelsApp-1.0-jar-with-dependencies.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../LabelsApp/target/LabelsApp-1.0-jar-with-dependencies.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LabelsApp/target/LabelsApp-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../LabelsApp/target/LabelsApp-1.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LabelsApp/target/classes/subscriber/DetectService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../LabelsApp/target/classes/subscriber/DetectService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LabelsApp/target/classes/subscriber/LabelsApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/../LabelsApp/target/classes/subscriber/LabelsApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LabelsApp/target/classes/subscriber/MessageReceiveHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/../LabelsApp/target/classes/subscriber/MessageReceiveHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LabelsApp/target/classes/subscriber/PubSubService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../LabelsApp/target/classes/subscriber/PubSubService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LabelsApp/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../LabelsApp/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +70,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -52,6 +85,10 @@
       <updated>1623923661213</updated>
       <workItem from="1623923663013" duration="1858000" />
       <workItem from="1623927119779" duration="5208000" />
+      <workItem from="1623955435758" duration="4452000" />
+      <workItem from="1624012929052" duration="4539000" />
+      <workItem from="1624025994083" duration="582000" />
+      <workItem from="1624032616933" duration="737000" />
     </task>
     <servers />
   </component>

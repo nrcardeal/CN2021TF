@@ -5,17 +5,20 @@ import com.google.gson.Gson;
 
 import java.io.BufferedWriter;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class CloudFunction implements HttpFunction {
+    private static final Logger logger = Logger.getLogger(CloudFunction.class.getName());
     @Override
     public void service(HttpRequest httpRequest, HttpResponse httpResponse) throws Exception {
        if(httpRequest.getFirstQueryParameter("name").isPresent()) {
            BufferedWriter writer = httpResponse.getWriter();
            String instanceGroup =  httpRequest.getFirstQueryParameter("name").get();
-           List<String> instances = LookupService.listInstanceGroupInstances(instanceGroup);
+           logger.info(instanceGroup);
+           List<String> instances = LookupService.listInstanceGroupInstances(instanceGroup, logger);
+           logger.info("Instances: " + instances);
            Gson gson = new Gson();
-           gson.toJson(instances);
-           writer.write(gson.toString());
+           writer.write(gson.toJson(instances));
        }
 
     }

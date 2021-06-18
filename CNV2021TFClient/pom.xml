@@ -17,6 +17,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>isel.cn</groupId>
+            <artifactId>CNV2021TFContract</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-netty-shaded</artifactId>
             <version>1.37.0</version>
@@ -33,12 +39,10 @@
         </dependency>
 
         <dependency>
-            <groupId>isel.cn</groupId>
-            <artifactId>CNV2021TFContract</artifactId>
-            <version>1.0</version>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.6</version>
         </dependency>
-
-
     </dependencies>
 
 
