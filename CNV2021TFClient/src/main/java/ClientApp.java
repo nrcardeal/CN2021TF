@@ -14,6 +14,8 @@ import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Scanner;
 
@@ -99,28 +101,33 @@ public class ClientApp {
         ClientStreamObserver streamObserver = new ClientStreamObserver();
         StreamObserver<ImageRequest> contents = noBlockStub.uploadImage(streamObserver);
         Path uploadFrom = Paths.get(filePath);
-        String filename = uploadFrom.getFileName().toString();
-        String contentType = Files.probeContentType(uploadFrom);
-        byte[] buffer = new byte[1024];
-        try (InputStream input = Files.newInputStream(uploadFrom)) {
-            while ((input.read(buffer)) >= 0) {
-                contents.onNext(
-                        ImageRequest
-                                .newBuilder()
-                                .setImageBlockBytes(ByteString.copyFrom(buffer))
-                                .setBlobName(filename)
-                                .setContentType(contentType)
-                                .build()
-                );
+        if (Files.notExists(uploadFrom)) {
+            System.out.println("This File does not Exist!");
+        }
+        else{
+            String filename = uploadFrom.getFileName().toString();
+            String contentType = Files.probeContentType(uploadFrom);
+            byte[] buffer = new byte[1024];
+            try (InputStream input = Files.newInputStream(uploadFrom)) {
+                while ((input.read(buffer)) >= 0) {
+                    contents.onNext(
+                            ImageRequest
+                                    .newBuilder()
+                                    .setImageBlockBytes(ByteString.copyFrom(buffer))
+                                    .setBlobName(filename)
+                                    .setContentType(contentType)
+                                    .build()
+                    );
+                }
+                contents.onCompleted();
+                while (!streamObserver.isCompleted) {
+                    System.out.println("Uploading Image...");
+                    Thread.sleep(1000);
+                }
+                System.out.println("Image uploaded with ID: " + streamObserver.results.get(0).getId());
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            contents.onCompleted();
-            while (!streamObserver.isCompleted) {
-                System.out.println("Uploading Image...");
-                Thread.sleep(1000);
-            }
-            System.out.println("Image uploaded with ID: " + streamObserver.results.get(0).getId());
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -146,31 +153,40 @@ public class ClientApp {
     }
 
     static void FilterFiles() {
-        System.out.println("Filter's initial date?");
+        System.out.println("Filter's initial date? (dd/MM/yyyy)");
         Scanner in = new Scanner(System.in);
         String initDate = in.nextLine();
-        System.out.println("Filter's end date?");
+        System.out.println("Filter's end date? (dd/MM/yyyy)");
         in = new Scanner(System.in);
         String endDate = in.nextLine();
-        System.out.println("Filter's label");
-        in = new Scanner(System.in);
-        String label = in.nextLine();
-        FilterRequest request = FilterRequest
-                .newBuilder()
-                .setInitDate(initDate)
-                .setEndDate(endDate)
-                .setLabel(label)
-                .build();
-        FilterResult result = blockingStub.filterFiles(request);
-        System.out.println("Searching for files...");
-        if(!result.getFilenameList().isEmpty()) {
-            System.out.println("Filtered Files:");
-            for (String name : result.getFilenameList()) {
-                System.out.println(name);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd h:m");
+        try {
+            if(!sdf.parse(initDate).before(sdf.parse(endDate)))
+                System.out.println("The End Date is before the Initial Date!");
+            else {
+                System.out.println("Filter's label");
+
+                in = new Scanner(System.in);
+                String label = in.nextLine();
+                FilterRequest request = FilterRequest
+                        .newBuilder()
+                        .setInitDate(initDate)
+                        .setEndDate(endDate)
+                        .setLabel(label)
+                        .build();
+                FilterResult result = blockingStub.filterFiles(request);
+                System.out.println("Searching for files...");
+                if (!result.getFilenameList().isEmpty()) {
+                    System.out.println("Filtered Files:");
+                    for (String name : result.getFilenameList()) {
+                        System.out.println(name);
+                    }
+                } else {
+                    System.out.println("There were no files with those filters.");
+                }
             }
-        }
-        else {
-            System.out.println("There were no files with those filters.");
+        } catch (ParseException e) {
+            System.out.println("Invalid date Format!");
         }
     }
 
