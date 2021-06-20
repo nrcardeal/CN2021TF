@@ -3,7 +3,6 @@ package cnv2021tfservice.services;
 import cnv2021tfservice.exceptions.DocumentNotFoundException;
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.*;
 
 import java.util.*;
@@ -44,7 +43,6 @@ public class FirestoreService {
                 .whereLessThanOrEqualTo("uploadDate", endDate)
                 .whereArrayContains("translated", label);
         ApiFuture<QuerySnapshot> querySnapshot = query.get();
-        System.out.println(querySnapshot.get().getDocuments());
         for (DocumentSnapshot doc: querySnapshot.get().getDocuments())
             res.add(doc.getString("filename"));
         return res;
