@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="CNV2021TFContract-1.0">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../CNV2021TFContract/target/CNV2021TFContract-1.0.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
