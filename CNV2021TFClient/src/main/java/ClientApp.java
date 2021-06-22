@@ -124,7 +124,9 @@ public class ClientApp {
                     System.out.println("Uploading Image...");
                     Thread.sleep(1000);
                 }
-                System.out.println("Image uploaded with ID: " + streamObserver.results.get(0).getId());
+                if(!streamObserver.success)
+                    System.out.println("File with that name already exists. Please insert a file with a different name.");
+                else System.out.println("Image uploaded with ID: " + streamObserver.results.get(0).getId());
             } catch (Exception e) {
                 e.printStackTrace();
             }

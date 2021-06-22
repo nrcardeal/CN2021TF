@@ -3,6 +3,7 @@ package subscriber;
 import com.google.cloud.pubsub.v1.AckReplyConsumer;
 import com.google.cloud.pubsub.v1.MessageReceiver;
 import com.google.pubsub.v1.PubsubMessage;
+import io.grpc.Grpc;
 
 import java.util.List;
 
