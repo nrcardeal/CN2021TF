@@ -36,6 +36,7 @@ public class Function implements BackgroundFunction<Message> {
                 put("labels", labels);
                 put("translated", translated);
                 put("uploadDate", new Date());
+                put("ips", Arrays.asList(dataArray[2], dataArray[3]));
             }}, id);
         } catch (Exception e) {
             logger.info(e.getMessage());

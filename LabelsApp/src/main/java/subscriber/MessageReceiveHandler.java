@@ -5,6 +5,7 @@ import com.google.cloud.pubsub.v1.MessageReceiver;
 import com.google.pubsub.v1.PubsubMessage;
 import io.grpc.Grpc;
 
+import java.net.InetAddress;
 import java.util.List;
 
 public class MessageReceiveHandler implements MessageReceiver {
@@ -16,8 +17,14 @@ public class MessageReceiveHandler implements MessageReceiver {
             String id = fields[0];
             String bucketName = fields[1];
             String blobName = fields[2];
+            String serverIp = fields[3];
             List<String> labels = DetectService.detectLabels(bucketName, blobName);
-            PubSubService.publishMessage(id + ':' + labels, blobName);
+            PubSubService.publishMessage(
+                    id + ':' +
+                            labels + ':' +
+                            serverIp + ':' +
+                            InetAddress.getLocalHost().getHostAddress(),
+                    blobName);
             ackReply.ack();
         } catch (Exception e) {
             e.printStackTrace();

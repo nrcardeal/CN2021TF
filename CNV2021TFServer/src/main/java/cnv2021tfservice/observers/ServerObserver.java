@@ -10,6 +10,7 @@ import com.google.cloud.storage.BlobId;
 import io.grpc.stub.StreamObserver;
 
 import java.io.IOException;
+import java.net.InetAddress;
 
 public class ServerObserver implements StreamObserver<ImageRequest> {
 
@@ -53,7 +54,10 @@ public class ServerObserver implements StreamObserver<ImageRequest> {
             imageObserver.onNext(result);
             imageObserver.onCompleted();
             cloudPubSubService.publishMessage(
-                    result.getId() + " " + blobId.getBucket() + " " + blobId.getName(),
+                    result.getId() + " " +
+                            blobId.getBucket() + " " +
+                            blobId.getName() + " " +
+                            InetAddress.getLocalHost().getHostAddress(),
                     blobId.getName()
             );
         } catch (Exception e) {

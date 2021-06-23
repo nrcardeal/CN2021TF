@@ -16,6 +16,7 @@ public class ClientStreamObserver implements StreamObserver<ImageResult> {
 
     @Override
     public void onError(Throwable throwable) {
+        System.out.println(throwable.getMessage());
         isCompleted = true; success = false;
     }
 

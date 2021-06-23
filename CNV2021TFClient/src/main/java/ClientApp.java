@@ -22,9 +22,9 @@ import java.util.Scanner;
 public class ClientApp {
 
     //to use on local machine
-    private static String svcIP = "localhost";
+//    private static String svcIP = "localhost";
     //to use with vm
-    //private static String svcIP;
+    private static String svcIP = "";
     private static int svcPort = 8000;
     private static ManagedChannel channel;
     private static ServiceGrpc.ServiceStub noBlockStub;
@@ -33,7 +33,7 @@ public class ClientApp {
     public static void main(String[] args) {
         try {
             if(!svcIP.equals("localhost")) {
-                String cfURL = "https://europe-west3-g12-t1d-v2021.cloudfunctions.net/cn-http-function?name=cn2021vtf-server-instance-group";
+                String cfURL = "https://europe-west3-g12-t1d-v2021.cloudfunctions.net/cn-http-function?name=cnv2021tf-server-instance-group";
                 HttpClient client = HttpClient.newBuilder().build();
                 HttpRequest request = HttpRequest.newBuilder()
                         .uri(URI.create(cfURL))
@@ -124,9 +124,10 @@ public class ClientApp {
                     System.out.println("Uploading Image...");
                     Thread.sleep(1000);
                 }
-                if(!streamObserver.success)
-                    System.out.println("File with that name already exists. Please insert a file with a different name.");
-                else System.out.println("Image uploaded with ID: " + streamObserver.results.get(0).getId());
+                if(streamObserver.success)
+//                    System.out.println("File with that name already exists. Please insert a file with a different name.");
+//                else
+                System.out.println("Image uploaded with ID: " + streamObserver.results.get(0).getId());
             } catch (Exception e) {
                 e.printStackTrace();
             }
