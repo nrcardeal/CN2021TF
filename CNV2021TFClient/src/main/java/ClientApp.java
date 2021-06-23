@@ -162,7 +162,7 @@ public class ClientApp {
         System.out.println("Filter's end date? (dd/MM/yyyy)");
         in = new Scanner(System.in);
         String endDate = in.nextLine();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd h:m");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         try {
             if(!sdf.parse(initDate).before(sdf.parse(endDate)))
                 System.out.println("The End Date is before the Initial Date!");

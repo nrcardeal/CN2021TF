@@ -6,6 +6,7 @@ import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -26,8 +27,10 @@ public class FirestoreService {
             ApiFuture<DocumentSnapshot> future = docRef.get();
             DocumentSnapshot document = future.get();
             if (document.exists()) {
-                originals = document.get("labels", List.class);
-                translated = document.get("translated", List.class);
+                String labels = document.get("labels").toString();
+                String trsltd = document.get("translated").toString();
+                originals = Arrays.asList(labels.substring(1, labels.length()-1).split(", "));
+                translated = Arrays.asList(trsltd.substring(1, trsltd.length()-1).split(", "));
             }
             else {
                 throw new DocumentNotFoundException("Document does not exist.");
